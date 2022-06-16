@@ -1,6 +1,6 @@
 import numpy as np
 
-class FFTLocal:
+class FFT:
     def __init__(self) -> None:
         pass
 
@@ -14,8 +14,8 @@ class FFTLocal:
         self.__fftINV();
            
     def __filterPSD(self,psd:np.ndarray,minPct=0.0,maxPct=1.0)->np.ndarray:
-        s=np.sort(np.unique(psd))
-        min=200 #Currently hacked value s[-4]
+        #s=np.sort(np.unique(psd)) #s[-4]
+        min=200 #Currently hacked value 
         filteredPSD = np.where(psd > min, psd, 0)
         return filteredPSD
 
@@ -26,8 +26,13 @@ class FFTLocal:
         filteredFhat = self.__filterPSD(self.__psd)
         self.__periodicity = np.fft.ifft(filteredFhat).real
 
+    #Getters to serve the exportable properties below
+
     def __get_psd(self)->np.ndarray:
-        return self.__psd[1: round(self.__data.size/2)] #Take out negative frequencies and obs 0.
+
+        #1. Take out negative frequencies and obs 0.
+        #2. Only the real number. (Imaginary part is always zero.)
+        return self.__psd[1: round(self.__data.size/2)].real 
 
     def __get_original(self)->np.ndarray:
         return self.__data

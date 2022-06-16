@@ -2,9 +2,9 @@
 from flask import Flask, jsonify
 from flask_cors import CORS
 from flask_restful import Resource, Api
-from numpy import ndarray
-from Brunton.brunton import Brunton
-from FFT.fft import FFTLocal
+
+from FFT.fft import FFT
+from RandomTS.randomTs import RandomTS
 
 app = Flask(__name__)
 CORS(app)
@@ -12,20 +12,21 @@ api = Api(app)
 
 class FFTDecompose(Resource):
     def get(self):
-        bruntonInst = Brunton()
-        originalTs= bruntonInst.generateRandomnessTS()
         
-        fftInst = FFTLocal()
-        fftInst.fft(originalTs) #Note: return power spectrum density as is.
+        #Generate a time series
+        randomTsWithPeriodicity = RandomTS().generateTS()
         
-        return jsonify({
-            "original": list(originalTs),
-            "periodicity": list(fftInst.periodicity),
-            "trend": list(fftInst.periodicity),
-            "noise": list(fftInst.noise),
-            "psd": list(fftInst.psd.real)
-        }) 
+        #Instantiate the FFT class perform first the Fourier Transform and then 2) the inverse FFT
+        fftInst = FFT()
+        fftInst.fft(randomTsWithPeriodicity) 
 
+        #The fftInst will exposure exported data members as properties to protect the source
+        return jsonify({
+            "original": list(randomTsWithPeriodicity),
+            "periodicity": list(fftInst.periodicity),
+            "noise": list(fftInst.noise),
+            "psd": list(fftInst.psd) 
+        }) 
 
 api.add_resource(FFTDecompose, "/fftdecompose")
 
