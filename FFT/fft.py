@@ -6,12 +6,11 @@ class FFTLocal:
 
     def fft(self,data:np.ndarray):
         """
-        Magnitude as lambda*lambda_conj = |lambda|^2 = a^2+b^2 where lambda = a+ib (complex) and lambda_conj a-i b
-        (a+ib)*(a-ib)=a^2-(ib)^2=a^2+i^2*b^2=a^2-(-1)*b^2=a^2+b^2
+        Magnitude as lambda*lambda_conj = |lambda|^2 = (a+ib)*(a-ib)=a^2-(ib)^2=a^2+i^2*b^2=a^2-(-1)*b^2=a^2+b^2
         """
         self.__data = data
-        fhat = np.fft.fft(data, data.size)
-        self.__psd = (fhat*np.conj(fhat)/len(data)) #A vector of powers at each frequency
+        fhat = np.fft.fft(data,data.size)
+        self.__psd = (fhat*np.conj(fhat)/data.size) #A vector of powers at each frequency
         self.__fftINV();
            
     def __filterPSD(self,psd:np.ndarray,minPct=0.0,maxPct=1.0)->np.ndarray:
@@ -28,7 +27,7 @@ class FFTLocal:
         self.__periodicity = np.fft.ifft(filteredFhat).real
 
     def __get_psd(self)->np.ndarray:
-        return self.__psd
+        return self.__psd[1: round(self.__data.size/2)] #Take out negative frequencies and obs 0.
 
     def __get_original(self)->np.ndarray:
         return self.__data

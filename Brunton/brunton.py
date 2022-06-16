@@ -13,9 +13,6 @@ class Brunton:
         frequencies = [50,120]
         rndScaleFactor=2.5
 
-        # freq = 1+(1/(dt*horizon.size))*np.arange(horizon.size)
-        # print("FRED: ", round(freq,0))
-
         LTrigo = lambda t : np.sin(2 * np.pi*frequencies[0]*t) + np.sin(2*np.pi*frequencies[1]*t)
         LRando = lambda: rndScaleFactor*np.random.rand()
         
@@ -25,7 +22,7 @@ class Brunton:
             value = round(LTrigo(t)+LRando(),3)
             self.__values.append(value)
             bruntonTs.append( {'time': t, 'value': value})
-        
+
         return np.array(self.__values)
 
     def __get_values(self)->np.ndarray:
