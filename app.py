@@ -10,6 +10,10 @@ app = Flask(__name__)
 CORS(app)
 api = Api(app)
 
+class HelloWorld(Resource):
+    def get(self) ->str:
+        return "Hello world!"
+
 class FFTDecompose(Resource):
     def get(self):
         
@@ -29,5 +33,6 @@ class FFTDecompose(Resource):
         }) 
 
 api.add_resource(FFTDecompose, "/fftdecompose")
+api.add_resource(HelloWorld, "/helloworld")
 
 
