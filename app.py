@@ -16,7 +16,7 @@ class HelloWorld(Resource):
 
 class FFTDecompose(Resource):
     def get(self):
-        
+        print("HEJS")
         #Generate a time series
         randomTsWithPeriodicity = RandomTS().generateTS()
         

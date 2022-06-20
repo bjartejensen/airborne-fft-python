@@ -13,10 +13,12 @@ class FFT:
         self.__psd = (fhat*np.conj(fhat)/data.size) #A vector of powers at each frequency
         self.__fftINV();
            
-    def __filterPSD(self,psd:np.ndarray,minPct=0.0,maxPct=1.0)->np.ndarray:
+    def __filterPSD(self,psd:np.ndarray,filterPct=0.75)->np.ndarray:
         #s=np.sort(np.unique(psd)) #s[-4]
-        min=200 #Currently hacked value 
-        filteredPSD = np.where(psd > min, psd, 0)
+
+        maxPsd = self.psd.max()
+        threshold=filterPct*maxPsd
+        filteredPSD = np.where(psd > threshold, psd, 0)
         return filteredPSD
 
     def __fftINV(self):
