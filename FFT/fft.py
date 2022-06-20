@@ -14,7 +14,6 @@ class FFT:
         self.__fftINV();
            
     def __filterPSD(self,psd:np.ndarray,filterPct=0.75)->np.ndarray:
-        #s=np.sort(np.unique(psd)) #s[-4]
 
         maxPsd = self.psd.max()
         threshold=filterPct*maxPsd
