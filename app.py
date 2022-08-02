@@ -7,18 +7,14 @@ from FFT.fft import FFT
 from RandomTS.randomTs import RandomTS
 
 app = Flask(__name__)
+app.debug = True
 CORS(app)
 api = Api(app)
 
-class HelloWorld(Resource):
-    def get(self) ->str:
-        return "Hello world!"
-
 class FFTDecompose(Resource):
     def get(self):
-        print("HEJS")
         #Generate a time series
-        randomTsWithPeriodicity = RandomTS().generateTS()
+        randomTsWithPeriodicity = RandomTS().tsValues
         
         #Instantiate the FFT class perform first the Fourier Transform and then 2) the inverse FFT
         fftInst = FFT()
@@ -33,6 +29,5 @@ class FFTDecompose(Resource):
         }) 
 
 api.add_resource(FFTDecompose, "/fftdecompose")
-api.add_resource(HelloWorld, "/helloworld")
 
 
