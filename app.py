@@ -11,6 +11,10 @@ app.debug = True
 CORS(app)
 api = Api(app)
 
+class Welcome(Resource):
+    def get(self):    
+        return "Welcome to Airborne FFT"
+
 class FFTDecompose(Resource):
     def get(self):
         #Generate a time series
@@ -29,5 +33,6 @@ class FFTDecompose(Resource):
         }) 
 
 api.add_resource(FFTDecompose, "/fftdecompose")
+api.add_resource(Welcome, "/welcome")
 
 
