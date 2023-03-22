@@ -1,8 +1,8 @@
 import numpy as np
 import pytest
 
-# from Random.randomTs import RandomTS
-from .randomTs import RandomTS
+
+from ..randomTs import RandomTS
 
 
 @pytest.fixture
