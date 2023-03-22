@@ -1,5 +1,6 @@
 Flask
 Flask-Cors
 Flask-RESTful
+flake8
 numpy
 uwsgi
