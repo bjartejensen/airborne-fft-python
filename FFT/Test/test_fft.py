@@ -1,8 +1,8 @@
 import numpy as np
 import pytest
 
-from ..fft import FFT
 
+from FFT.fft import FFT
 from Random.randomTs import RandomTS
 
 

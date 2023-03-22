@@ -2,7 +2,6 @@ import numpy as np
 import pytest
 
 
-# from ..randomTs import RandomTS
 from Random.randomTs import RandomTS
 
 
