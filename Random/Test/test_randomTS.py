@@ -11,6 +11,10 @@ def randomTs() -> np.ndarray:
     return RandomTS().tsValues
 
 
+def test_dummy() -> None:
+    assert True
+
+
 def test_for_empty_of_generateRandomTS(randomTs: np.ndarray) -> None:
     """Test if length of random series > 0"""
     assert len(randomTs) > 0
