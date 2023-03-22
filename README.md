@@ -10,5 +10,5 @@ Airborne-fft-python exhibit an attempt to implement [Steven L. Brunton's compact
 
 Our implementation make use of Numpy's Fast Fourier Transform package, `numpy.fft.fft` and `numpy.fft.ifft`. ([See documentation here](https://numpy.org/doc/stable/reference/generated/numpy.fft.fft.html))
 
-In short, the api allows the consumer to filter (denoise) noisy data (i.e. data associated with power spectrum density below a user given threshold) in order to capture the most relevant periodicity in data.
+In short, the api allows the consumer to filter (denoise) noisy data (i.e. data associated with power spectrum density below a user given threshold) in order to capture the most prevalent periodicity in data.
 
