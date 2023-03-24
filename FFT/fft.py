@@ -2,6 +2,11 @@ import numpy as np
 
 
 class FFT:
+
+    __psd: np.ndarray
+    __data: np.ndarray
+    __periodicity: np.ndarray
+
     def __init__(self) -> None:
         pass
 

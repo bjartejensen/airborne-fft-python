@@ -10,8 +10,8 @@ class RandomTS:
 
     def __generateRandomTS(self) -> None:
         horizon = np.arange(0, 1, self.__dt)
-        frequencies = [50, 120]          # From Steven Bruntons example
-        rndScaleFactor = 2.5              # From Steven Bruntons example
+        frequencies = [50, 120]
+        rndScaleFactor = 2.5
 
         # Introducing periodicity
         def LTrigo(t: float) -> float:
